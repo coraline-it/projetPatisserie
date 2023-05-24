@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +24,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'user'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,8 +33,19 @@ Route::middleware('auth')->group(function () {
 });
 
 // ADMIN DASHBOARD
-Route::get('/admin_dashboard', function () {
-    return view('admin_dashboard');
-})->middleware(['auth', 'admin'])->name('admin_dashboard');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::prefix('/admin')->name('admin.')->group(function () {
+        Route::view('/','admin.admin_dashboard')->name('dashboard');
+
+        // Routes gestion des catégories des produits
+        Route::resource('categories', CategoryController::class);
+
+        // Routes gestion des produits
+        Route::resource('products', ProductController::class);
+
+        // Routes gestion des utilisateurs
+        Route::resource('users', UserController::class);
+    });
+});
 
 
