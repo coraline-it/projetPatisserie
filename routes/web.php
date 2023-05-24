@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,4 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+// ADMIN DASHBOARD
+Route::get('/admin_dashboard', function () {
+    return view('admin_dashboard');
+})->middleware(['auth', 'admin'])->name('admin_dashboard');
+
+
