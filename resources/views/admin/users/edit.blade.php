@@ -11,7 +11,7 @@
                 @endif
                 <form action="{{ route('admin.users.update',$user->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
+                    @method('PUT')
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="User Name" value="{{ $user->name }}">

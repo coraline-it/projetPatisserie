@@ -67,8 +67,10 @@
                                             </a>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('admin.users.destroy', $user->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user">
-                                                Delete
+                                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user">
+                                                @csrf
+                                                @method('DELETE')
+                                               <button type="submit" class="btn">Delete</button>
                                             </a>
                                         </td>
                                     </tr>
