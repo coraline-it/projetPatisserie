@@ -62,8 +62,10 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $product->price }}</span>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('admin.products.edit', $product->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
+                                            <form action="{{ route('admin.orders.destroy', $user->id) }}" method="POST" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user">
+                                                @csrf
+                                                @method('DELETE')
+                                               <button type="submit" class="btn">Delete</button>
                                             </a>
                                         </td>
                                     </tr>
