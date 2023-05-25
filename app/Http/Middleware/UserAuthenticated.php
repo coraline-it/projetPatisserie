@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserAuthenticated
@@ -23,7 +24,7 @@ class UserAuthenticated
             $user = Auth::user();
 
             // if user is not admin take him to his dashboard
-            if ( $user->hasRole('admin') ) {
+            if ( $user->hasRole('admin') || $user->hasRole('superAdmin')) {
                 return redirect(route('admin_dashboard'));
             }
 
