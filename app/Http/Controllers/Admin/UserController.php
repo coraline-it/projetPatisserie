@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -12,9 +14,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(UserRepository $repository)
     {
-        $users = User::all();
+        $users = $repository->pagination(10);
         return view('admin.users.index', compact('users'));
     }
 
@@ -23,15 +25,19 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        User::create($data);
+
+        return redirect()->route('admin.users.index')->with('success', 'L\'utilisateur a bien été créé !');
     }
 
     /**
@@ -58,6 +64,8 @@ class UserController extends Controller
         $data = $request->validated();
 
         $user->update($data);
+
+        return redirect()->route('admin.users.index')->with('succes', 'L\'utilisateur a bien été modifié !');
 
     }
 

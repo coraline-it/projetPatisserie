@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Admin;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreUserRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        if(Auth::user()->hasRole('suprAdmin')) {
+        if(Auth::user()->hasRole('superAdmin')) {
             return true;
         }
         return false;
@@ -27,8 +28,15 @@ class StoreUserRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255',
-            'description' => 'required'
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'confirmed', 'min:8', 'string'],
+            'name' => ['required', 'string'],
+            'first_name' => ['required', 'string'],
+            'zip_code' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'phone' => ['required', 'string'],
+            'role' => ['required', 'string'],
         ];
     }
 }
