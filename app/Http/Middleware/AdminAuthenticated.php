@@ -24,11 +24,11 @@ class AdminAuthenticated
 
             // if user is not admin take him to his dashboard
             if ( $user->hasRole('user') ) {
-                return redirect(route('dashboard'));
+                return redirect(route('front.home'));
             }
 
             // allow admin to proceed with request
-            else if ( $user->hasRole('admin') ) {
+            else if ( $user->hasRole('admin') || $user->hasRole('superAdmin') ) {
                 return $next($request);
             }
         }
