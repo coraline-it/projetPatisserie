@@ -9,65 +9,74 @@
                         {{ session()->get('success') }}
                     </div>
                 @endif
-                <form action="{{ route('admin.products.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.users.update',$user->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
 
                     <div class="form-group">
-                        <label for="product-image">Image</label>
-                        <input type="file" class="form-control" id="product-image" name="img" placeholder="Image du produit" accept="image/png, image/jpeg">
-                        @if($errors->has('img'))
-                            <div class="error">{{ $errors->first('img') }}</div>
-                        @endif
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name">Nom</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" placeholder="Nom du produit">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="User Name" value="{{ $user->name }}">
                         @if($errors->has('name'))
                             <div class="error">{{ $errors->first('name') }}</div>
                         @endif
                     </div>
-
-                    <div class="form-check">
-                        <label class="form-check-label" for="description">Description</label>
-                        <textarea name="description" id="description" cols="30" rows="10">
-                            {{ $user->description }}
-                        </textarea>
-                        @if($errors->has('description'))
-                            <div class="error">{{ $errors->first('description') }}</div>
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="User First Name" value="{{ $user->first_name }}">
+                        @if($errors->has('first_name'))
+                            <div class="error">{{ $errors->first('first_name') }}</div>
                         @endif
                     </div>
-
-                    <div class="form-check">
-                        <label class="form-check-label" for="category">Catégorie</label>
-                        <select name="category_id" id="category">
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}" selected="{{ $user->category_id === $category->id ? true : false }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                        @if($errors->has('category_id'))
-                            <div class="error">{{ $errors->first('category_id') }}</div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email"value="{{ $user->email }}">
+                        @if($errors->has('first_name'))
+                            <div class="error">{{ $errors->first('email') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone" value="{{ $user->phone }}">
+                        @if($errors->has('phone'))
+                            <div class="error">{{ $errors->first('phone') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        @if($errors->has('password'))
+                            <div class="error">{{ $errors->first('password') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="password_confirmation">Repeat Password</label>
+                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Password Confirmation"value="{{ $user->password_confirmation }}">
+                        @if($errors->has('password_confirmation'))
+                            <div class="error">{{ $errors->first('password_confirmation') }}</div>
                         @endif
                     </div>
 
                     <div class="form-group">
-                        <label for="quantity">Quantité</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $user->quantity }}" placeholder="Quantité du produit">
-                        @if($errors->has('quantity'))
-                            <div class="error">{{ $errors->first('quantity') }}</div>
+                        <label for="phone">Adress</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Adress"value="{{ $user->address }}">
+                        @if($errors->has('adress'))
+                            <div class="error">{{ $errors->first('adress') }}</div>
                         @endif
                     </div>
-
                     <div class="form-group">
-                        <label for="price">Prix unitaire</label>
-                        <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ $user->price }}" placeholder="PU">
-                        @if($errors->has('price'))
-                            <div class="error">{{ $errors->first('price') }}</div>
+                        <label for="zip_code">Zip Code</label>
+                        <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="Zip code"value="{{ $user->zip_code }}">
+                        @if($errors->has('zip_code'))
+                            <div class="error">{{ $errors->first('zip_code') }}</div>
                         @endif
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="City" value="{{ $user->city }}">
+                        @if($errors->has('city'))
+                            <div class="error">{{ $errors->first('city') }}</div>
+                        @endif
+                    </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>

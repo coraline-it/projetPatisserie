@@ -28,7 +28,7 @@ class RedirectIfAuthenticated
                 $user = Auth::guard($guard);
 
                 // to admin dashboard
-                if($user->hasRole('admin')) {
+                if( $user->hasRole('admin') || $user->hasRole('superAdmin')  ) {
                     return redirect(route('admin.admin_dashboard'));
                 }
 

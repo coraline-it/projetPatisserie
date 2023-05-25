@@ -13,14 +13,17 @@
                     <div class="card-header pb-0">
                          <div class="row">
                               <div class="col-6 d-flex align-items-center">
-                                   <h6>Les produits</h6>
+                                   <h6>Les utilisateurs</h6>
                               </div>
+                              @if (auth()->user()->hasRole('superAdmin'))
                                     <div class="col-6 text-end">
                                         <a class="btn bg-gradient-dark mb-0" href="{{ route('admin.users.create') }}">
+
                                             <i class="fas fa-plus" aria-hidden="true"></i>
-                                        &nbsp;   Ajouter un produit
+                                        &nbsp;   Ajouter un utilisateur
                                         </a>
                                     </div>
+                                    @endif
                              </div>
                         </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -61,6 +64,11 @@
                                         <td class="align-middle">
                                             <a href="{{ route('admin.users.edit', $user->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                                 Edit
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="{{ route('admin.users.destroy', $user->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user">
+                                                Delete
                                             </a>
                                         </td>
                                     </tr>
