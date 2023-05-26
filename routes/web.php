@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Front\AboutController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\ContactController;
@@ -45,8 +48,19 @@ Route::middleware('auth')->group(function () {
 });
 
 // ADMIN DASHBOARD
-Route::get('/admin_dashboard', function () {
-    return view('admin_dashboard');
-})->middleware(['auth', 'admin'])->name('admin_dashboard');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::prefix('/admin')->name('admin.')->group(function () {
+        Route::view('/','admin.admin_dashboard')->name('dashboard');
+
+        // Routes gestion des catégories des produits
+        Route::resource('categories', CategoryController::class);
+
+        // Routes gestion des produits
+        Route::resource('products', ProductController::class);
+
+        // Routes gestion des utilisateurs
+        Route::resource('users', UserController::class);
+    });
+});
 
 
