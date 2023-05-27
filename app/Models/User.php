@@ -32,7 +32,13 @@ class User extends Authenticatable
         'role'
 
     ];
+
+    protected $appends = [
+        'total_amount_orders'
+    ];
+
     protected $table = "users";
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -67,5 +73,10 @@ class User extends Authenticatable
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function getTotalAmountOrdersAttribute()
+    {
+        return Order::selectRaw('SUM(total) as total')->where('user_id', $this->id)->first(['total']);
     }
 }

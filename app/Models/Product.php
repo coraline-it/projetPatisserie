@@ -20,9 +20,9 @@ class Product extends Model
         'price'
     ];
 
-    public function orderProducts(): BelongsToMany
+    public function orders(): BelongsToMany
     {
-        return $this->belongsToMany(OrderProduct::class);
+        return $this->belongsToMany(Order::class);
     }
 
     public function category()

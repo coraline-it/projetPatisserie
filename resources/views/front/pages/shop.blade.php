@@ -31,7 +31,7 @@
                                             </h2>
                                             @if($product->quantity > 0)
                                                 <div class="flex items-center bg-green-400 text-white text-xs px-2 py-1 ml-3 rounded-lg">
-                                                    INSTOCK
+                                                    {{ $product->quantity }} INSTOCK
                                                 </div>
                                             @else
                                                 <div class="flex items-center bg-red-400 text-white text-xs px-2 py-1 ml-3 rounded-lg">

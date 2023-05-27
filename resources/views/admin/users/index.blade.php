@@ -7,11 +7,24 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                          <div class="row">
-                            <div class="col-6 d-flex align-items-center">
-                                <h6>Les produits</h6>
+                            <div class="col-4 d-flex align-items-center">
+                                <h6>Les utilisateurs</h6>
                             </div>
+                             <div class="col-4 d-flex align-items-center">
+                                 <form action="{{ route('admin.users.search') }}" method="POST">
+                                     @csrf
+                                     <div class="input-group">
+                                         <div class="form-outline">
+                                             <input type="search" id="form1" name="search_user" class="form-control" />
+                                         </div>
+                                         <button type="submit" class="btn btn-primary">
+                                             <i class="fas fa-search"></i>
+                                         </button>
+                                     </div>
+                                 </form>
+                             </div>
                              @if(auth()->user()->hasRole('superAdmin'))
-                                 <div class="col-6 text-end">
+                                 <div class="col-4 text-end">
                                      <a class="btn bg-gradient-dark mb-0" href="{{ route('admin.users.create') }}">
                                          <i class="fas fa-plus" aria-hidden="true"></i>
                                      &nbsp;   Ajouter un utilisateur

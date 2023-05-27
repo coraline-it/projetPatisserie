@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,9 +14,13 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(UserRepository $repository, $search = null)
     {
-        $users = User::all();
+        if (isset($search)) {
+            $users = $repository->searchUsers($search);
+        } else {
+            $users = $repository->pagination();
+        }
         return view('admin.users.index', compact('users'));
     }
 
@@ -75,5 +80,15 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users.index')->with('success', 'L\'utilisateur a bien été supprimé !');
+    }
+
+    /**
+     * Search the specified resource from input.
+     */
+    public function searchUsers(Request $request, UserRepository $repository)
+    {
+        $users = $repository->searchUsers($request->search_user);
+
+        return view('admin.users.index', compact('users'));
     }
 }

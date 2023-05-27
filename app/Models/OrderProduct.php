@@ -11,7 +11,7 @@ class OrderProduct extends Model
 {
     use HasFactory;
 
-    public function order(): BelongsTo
+    /*public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }
@@ -19,5 +19,5 @@ class OrderProduct extends Model
     public function product(): HasOne
     {
         return $this->hasOne(Product::class);
-    }
+    }*/
 }

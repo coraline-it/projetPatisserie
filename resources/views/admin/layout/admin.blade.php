@@ -23,10 +23,6 @@
 @include('admin.layout.side_navbar')
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- Navbar -->
-    @include('admin.layout.main_navbar')
-    <!-- End Navbar -->
-
     <!-- MAIN CONTENT -->
     @yield('content')
 </main>

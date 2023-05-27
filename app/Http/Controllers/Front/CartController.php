@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
+use Carbon\Carbon;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
@@ -67,6 +72,29 @@ class CartController extends Controller
 
     public function validateCart()
     {
-        dd(\Cart::getContent());
+        $items = \Cart::getContent();
+        $items_id = [];
+        foreach ($items as $item) {
+            $items_id[$item->id] = [
+                'quantity' => $item->quantity,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ];
+            // Update quantity products
+            $product = Product::find($item->id);
+            $product->update(['quantity' => $product->quantity - $item->quantity]);
+        }
+        $order = Order::create([
+           'user_id' => Auth::id(),
+            'payed_at' => Carbon::now(),
+            'status' => 'payed',
+            'order_number' => Str::random(),
+            'total' => \Cart::getTotal()
+        ]);
+        $order->products()->sync($items_id);
+
+        $this->clearAllCart();
+
+        return redirect()->back()->with('success', 'Votre commande est validée !');
     }
 }
