@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('order_products', function (Blueprint $table) {
-            $table->integer('quantity');
-            $table->decimal('price');
+        Schema::table('users', function (Blueprint $table) {
+            $table->timestamp('last_login_at')->nullable();
+            $table->string('last_login_ip')->nullable();
         });
     }
 
@@ -22,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('order_products', function (Blueprint $table) {
-            $table->dropColumn('quantity', 'price');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('last_login_at', 'last_login_ip');
         });
     }
 };

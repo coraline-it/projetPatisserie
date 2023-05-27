@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
  */
-class ProductFactory extends Factory
+class OrderFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,12 +18,11 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_id' => fake()->randomElement([1, 2, 3]),
-            'name' => fake()->jobTitle(),
-            'description' => fake()->realText(),
-            'quantity' => fake()->numberBetween(0, 50),
-            'img' => fake()->imageUrl(),
-            'price' => fake()->randomFloat(2, 1, 30)
+            'user_id' => fake()->numberBetween(1, 10),
+            'payed_at' => fake()->dateTimeBetween(Carbon::now()->subDays(2), Carbon::now()),
+            'status' => 'payed',
+            'order_number' => fake()->uuid(),
+            'total' => fake()->randomFloat(2, 10, 200),
         ];
     }
 }

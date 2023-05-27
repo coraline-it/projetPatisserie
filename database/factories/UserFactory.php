@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -29,6 +30,9 @@ class UserFactory extends Factory
             'zip_code' => fake()->postcode(),
             'phone' => fake()->phoneNumber(),
             'role'=> fake()->randomElement(['admin','user']),
+            'created_at' => fake()->dateTimeBetween(Carbon::now()->subDays(3), Carbon::now()),
+            'last_login_at' => fake()->dateTimeBetween(Carbon::now()->subDays(4), Carbon::now()),
+            'last_login_ip' => fake()->ipv4()
         ];
     }
 

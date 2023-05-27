@@ -11,6 +11,9 @@ class AdminController extends Controller
     public function index(AdminRepository $adminRepository): View
     {
         $today_money = $adminRepository->getTodayMoney();
-        return view('admin.admin_dashboard', compact('today_money'));
+        $today_users_connected = $adminRepository->getTodayUsersConnected();
+        $today_new_users = $adminRepository->getTodayNewUsers();
+        $today_orders = $adminRepository->getTodayOrders();
+        return view('admin.admin_dashboard', compact('today_money', 'today_users_connected', 'today_new_users', 'today_orders'));
     }
 }
