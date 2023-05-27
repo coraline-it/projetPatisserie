@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
@@ -48,7 +49,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // ADMIN DASHBOARD
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('/admin')->name('admin.')->group(function () {
-        Route::view('/','admin.admin_dashboard')->name('dashboard');
+        Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+        //Route::view('/','admin.admin_dashboard')->name('dashboard');
 
         // Routes gestion des catégories des produits
         Route::resource('categories', CategoryController::class);

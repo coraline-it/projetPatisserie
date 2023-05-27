@@ -11,8 +11,8 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        $53,000
-                                        <span class="text-success text-sm font-weight-bolder">+55%</span>
+                                        {{ $today_money['total'] }}
+                                        <span class="text-success text-sm font-weight-bolder">+{{ $today_money['percentage_yesterday'] }}%</span>
                                     </h5>
                                 </div>
                             </div>
