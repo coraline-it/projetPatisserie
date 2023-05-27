@@ -4,24 +4,20 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                @if(session()->has('success'))
-                    <div class="alert alert-success">
-                        {{ session()->get('success') }}
-                    </div>
-                @endif
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                          <div class="row">
-                              <div class="col-6 d-flex align-items-center">
-                                   <h6>Les produits</h6>
-                              </div>
-                                    <div class="col-6 text-end">
-                                        <a class="btn bg-gradient-dark mb-0" href="{{ route('admin.users.create') }}">
-                                            <i class="fas fa-plus" aria-hidden="true"></i>
-                                        &nbsp;   Ajouter un produit
-                                        </a>
-                                    </div>
-                             </div>
+                            <div class="col-6 d-flex align-items-center">
+                                <h6>Les produits</h6>
+                            </div>
+                             @if(auth()->user()->hasRole('superAdmin'))
+                                 <div class="col-6 text-end">
+                                     <a class="btn bg-gradient-dark mb-0" href="{{ route('admin.users.create') }}">
+                                         <i class="fas fa-plus" aria-hidden="true"></i>
+                                     &nbsp;   Ajouter un utilisateur
+                                     </a>
+                                 </div>
+                             @endif
                         </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -59,9 +55,18 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $user->price }}</span>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('admin.users.edit', $user->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
-                                            </a>
+                                            @if(auth()->user()->hasRole('superAdmin'))
+                                                <div>
+                                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                        Edit
+                                                    </a>
+                                                </div>
+                                            @endif
+                                            <div>
+                                                <a href="{{ route('admin.users.show', $user->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Show user">
+                                                    Show
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
