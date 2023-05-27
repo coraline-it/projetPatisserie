@@ -7,7 +7,7 @@
         </a>
     </div>
     <hr class="horizontal dark mt-0">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+    <div class="h-full w-auto">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link {{ \Illuminate\Support\Facades\Route::is('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
