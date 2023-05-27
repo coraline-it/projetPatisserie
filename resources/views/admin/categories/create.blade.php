@@ -4,11 +4,6 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
-                @if(session()->has('success'))
-                    <div class="alert alert-success">
-                        {{ session()->get('success') }}
-                    </div>
-                @endif
                 <form action="{{ route('admin.categories.store') }}" method="POST">
                     @csrf
                     <div class="form-group">

@@ -82,41 +82,11 @@
                             @endif
                         </div>
                     @endif
-                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
                 </form>
-                @if(auth()->user()->hasRole('superAdmin'))
-                    <form id="deleteForm" action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" id="confirmDelete">Supprimer l'utilisateur</button>
-                    </form>
-                @endif
             </div>
         </div>
     </div>
-@stop
-
-@section('footer-script')
-    {{-- DELETE USERS CONFIRM SCRIPT --}}
-    <script type="text/javascript">
-        let confirmDeleteButton = document.getElementById('confirmDelete');
-        if(confirmDeleteButton) {
-            confirmDeleteButton.addEventListener('click', (e) => {
-                let form =  document.getElementById('deleteForm');
-                e.preventDefault();
-                Swal.fire({
-                    title: `Etes-vous sûr de vouloir supprimer ce document ?`,
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit();
-                    }
-                });
-            })
-        }
-    </script>
 @stop
