@@ -23,4 +23,10 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+        // Create ManyToMany relashionship with customers table
+        public function orders() {
+
+            return $this->belongsToMany(Order::class)->using(OrderProduct::class)->withPivot('product_id','order_id','quantity','price');
+        }
 }

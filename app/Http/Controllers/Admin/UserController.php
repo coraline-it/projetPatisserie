@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Repositories\Admin\UserRepository;
+use App\Http\Requests\Admin\UpdateUserRequest;
+use App\Http\Requests\Admin\StoreUserRequest;
 
 class UserController extends Controller
 {
@@ -20,17 +23,22 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(UserRepository $repository)
     {
-        //
+        $users = $repository->getAll();
+
+        return view('admin.users.create', compact('users'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $data = $request->validated();
+
+         User::create($data);
+       return redirect()->route('admin.users.index')->with('succes', "L'utilisateur à été créé avec succès !");
     }
 
     /**
@@ -52,16 +60,20 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $data = $request->validated();
+        $user->update($data);
+
+        return redirect()->route('admin.users.index')->with('succes', "L'utilisateur à été modifié avec succès !");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('success', " l'utilisateur a été supprimé avec succès !");
     }
 }
