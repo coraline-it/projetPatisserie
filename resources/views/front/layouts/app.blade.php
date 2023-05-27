@@ -12,26 +12,46 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Digitf</title>
-
-    <!-- slider stylesheet -->
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+    <title>Miam miam</title>
 
     <!-- fonts style -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700&display=swap" rel="stylesheet">
 
-    @vite(["resources/css/front/app.css", "resources/js/front/app.js"])
+    @vite("resources/css/front/app.css")
 </head>
 
 <body>
-    <div class="hero_area">
+    {{-- NAVBAR --}}
+    <div class="hero_area mb-12">
         @include('front.layouts.navigation')
-
     </div>
-    <main>
+
+    {{-- MAIN CONTENT --}}
+    <main id="app">
         @yield('content')
     </main>
+
+    {{-- JS SCRIPTS    --}}
+    <!-- sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        @if($message = session('success'))
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '{{ $message }}',
+                showConfirmButton: false,
+                timer: 2500,
+                width: '300px',
+                height: '150px'
+            })
+        @endif
+    </script>
+
+@yield('footer-script')
+
+@vite("resources/js/front/app.js")
 </body>
 
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,6 @@ class CartController extends Controller
     public function cartList()
     {
         $cartItems = \Cart::getContent();
-        // dd($cartItems);
         return view('front.pages.cart', compact('cartItems'));
     }
 
@@ -26,9 +26,9 @@ class CartController extends Controller
                 'image' => $request->image,
             )
         ]);
-        session()->flash('success', 'Product is Added to Cart Successfully !');
+        session()->flash('success', 'Article ajouté avec succès !');
 
-        return redirect()->route('front.home');
+        return redirect()->back();
     }
 
     public function updateCart(Request $request)
@@ -45,7 +45,7 @@ class CartController extends Controller
 
         session()->flash('success', 'Item Cart is Updated Successfully !');
 
-        return redirect()->route('cart.list');
+        return redirect()->route('front.cart.list');
     }
 
     public function removeCart(Request $request)
@@ -53,7 +53,7 @@ class CartController extends Controller
         \Cart::remove($request->id);
         session()->flash('success', 'Item Cart Remove Successfully !');
 
-        return redirect()->route('cart.list');
+        return redirect()->route('front.cart.list');
     }
 
     public function clearAllCart()
@@ -62,7 +62,7 @@ class CartController extends Controller
 
         session()->flash('success', 'All Item Cart Clear Successfully !');
 
-        return redirect()->route('cart.list');
+        return redirect()->route('front.cart.list');
     }
 
     public function validateCart()
