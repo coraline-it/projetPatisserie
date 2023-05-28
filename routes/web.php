@@ -36,7 +36,7 @@ Route::prefix('/')->name('front.')->group(function () {
 // USERS, ADMIN, SUPERADMIN ROUTES
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('/')->name('front.')->group(function () {
-        Route::view('/profile','profile.edit')->name('profile');
+        Route::get('/profile',[ProfileController::class, 'index'])->name('profile.index');
         Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
         Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
         Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');

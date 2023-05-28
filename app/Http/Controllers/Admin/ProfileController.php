@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
@@ -15,9 +15,9 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function index(): View
+    public function edit(): View
     {
-        return view('front.pages.profile', [
+        return view('admin.profile.edit', [
             'user' => Auth::user(),
         ]);
     }
@@ -35,7 +35,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('front.pages.profile')->with('status', 'profile-updated');
+        return Redirect::route('admin.profile.edit')->with('status', 'profile-updated');
     }
 
     /**
