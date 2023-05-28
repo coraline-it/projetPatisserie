@@ -12,7 +12,7 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if(Auth::user()->hasRole('admin')) {
+        if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('superAdmin')) {
             return true;
         }
         return false;

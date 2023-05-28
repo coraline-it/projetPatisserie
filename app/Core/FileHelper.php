@@ -13,6 +13,6 @@ class FileHelper
     public static function storeFile($file, $disk, $fileName)
     {
         $fileName = Str::lower($fileName);
-        return Storage::disk($disk)->putFileAs('products/' . $fileName . '/', $file, $fileName . '-' . Carbon::now()->format('d/m/Y-His'));
+        return Storage::disk($disk)->putFileAs('products/' . $fileName, $file, $fileName . '-' . Carbon::now()->format('dmY_His'));
     }
 }

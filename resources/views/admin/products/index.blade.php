@@ -45,7 +45,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $product->description }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ substr($product->description, 0, 100) . '...' }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <span class="badge badge-sm bg-gradient-success">{{ $product->category->name }}</span>

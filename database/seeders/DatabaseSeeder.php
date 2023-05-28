@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -72,7 +73,7 @@ class DatabaseSeeder extends Seeder
             'last_login_ip' => fake()->ipv4()
         ]);
         // random users
-        User::factory(10)->create();
+        User::factory(100)->create();
 
 
         // CATEGORIES PRODUCTS
@@ -86,19 +87,14 @@ class DatabaseSeeder extends Seeder
 
 
         // PRODUCTS CREATE
-        Product::factory(23)->create();
+        Storage::deleteDirectory('public/products');
+        Storage::makeDirectory('public/products');
+        Product::factory(15)->create();
 
         // ORDERS CREATE
-        Order::factory(20)->create();
+        Order::factory(4000)->create();
 
         // ORDER PRODUCTS CREATE
-        OrderProduct::factory(250)->create();
-
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        OrderProduct::factory(10000)->create();
     }
 }
-

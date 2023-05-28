@@ -30,8 +30,9 @@ class UserFactory extends Factory
             'zip_code' => fake()->postcode(),
             'phone' => fake()->phoneNumber(),
             'role'=> fake()->randomElement(['admin','user']),
-            'created_at' => fake()->dateTimeBetween(Carbon::now()->subDays(3), Carbon::now()),
-            'last_login_at' => fake()->dateTimeBetween(Carbon::now()->subDays(4), Carbon::now()),
+            'created_at' => fake()->dateTimeBetween(Carbon::now()->subMonths(2), Carbon::now()),
+            'updated_at' => fake()->dateTimeBetween(Carbon::now()->subMonths(2), Carbon::now()),
+            'last_login_at' => fake()->dateTimeBetween(Carbon::now()->subMonth(), Carbon::now()),
             'last_login_ip' => fake()->ipv4()
         ];
     }

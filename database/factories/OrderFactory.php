@@ -18,11 +18,12 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->numberBetween(1, 10),
-            'payed_at' => fake()->dateTimeBetween(Carbon::now()->subDays(2), Carbon::now()),
+            'user_id' => fake()->numberBetween(1, 103),
+            'payed_at' => fake()->dateTimeBetween(Carbon::now()->subMonths(2), Carbon::now()),
             'status' => 'payed',
             'order_number' => fake()->uuid(),
-            'total' => fake()->randomFloat(2, 10, 200),
+            'total' => fake()->randomFloat(2, 10, 80),
+            'created_at' => fake()->dateTimeBetween(Carbon::now()->subMonths(2), Carbon::now())
         ];
     }
 }
