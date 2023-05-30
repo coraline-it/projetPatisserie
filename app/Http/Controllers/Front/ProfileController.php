@@ -17,8 +17,15 @@ class ProfileController extends Controller
      */
     public function index(): View
     {
-        return view('front.pages.profile', [
-            'user' => Auth::user(),
+        $user = Auth::user();
+
+        if ($user->hasRole('admin') || $user->hasRole('superAdmin')) {
+            return view('admin.profile.edit', [
+                'user' => $user,
+            ]);
+        }
+        return view('front.page.profile', [
+            'user' => $user,
         ]);
     }
 

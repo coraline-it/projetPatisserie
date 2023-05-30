@@ -117,7 +117,10 @@ class AdminRepository
     private function calculatePercentageScoreBetween2Dates($yesterday_total, $today_total): float
     {
         $diff_between = $yesterday_total - $today_total;
-        $average_between = ($yesterday_total + $today_total)/2;
-        return round(($diff_between / $average_between) * 100, 2);
+        $average_between = ($yesterday_total + $today_total) / 2;
+        if ($average_between > 0) {
+            return round(($diff_between / $average_between) * 100, 2);
+        }
+        return 0;
     }
 }
